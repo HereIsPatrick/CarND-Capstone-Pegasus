@@ -10,7 +10,7 @@ This is the project repo for the final project of the Udacity Self-Driving Car N
 
 
 ### Environment
-| Pegasus member  | email | 
+| Item  | Detail | 
 |:-----------------|:-------|
 | CPU |Intel i5 - 6 CPU|
 | RAM |16G| 
