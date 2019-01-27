@@ -31,9 +31,9 @@ that we have created in the `__init__` function.
 
 '''
 
-#####
-# DBW Node based on walkthrough in Udacity Self-Driving Car Term 3  course videos
-##
+UPDATE_RATE= 50
+#UPDATE_RATE= 10
+
 class DBWNode(object):
     def __init__(self):
         rospy.init_node('dbw_node')
@@ -47,7 +47,8 @@ class DBWNode(object):
         wheel_base = rospy.get_param('~wheel_base', 2.8498)
         steer_ratio = rospy.get_param('~steer_ratio', 14.8)
         max_lat_accel = rospy.get_param('~max_lat_accel', 3.)
-        max_steer_angle = rospy.get_param('~max_steer_angle', 8.)
+        #max_steer_angle = rospy.get_param('~max_steer_angle', 8.)
+        max_steer_angle = rospy.get_param('~max_steer_angle', 14.) #GFH upped to 25
 
         self.steer_pub = rospy.Publisher('/vehicle/steering_cmd',
                                          SteeringCmd, queue_size=1)
@@ -71,10 +72,11 @@ class DBWNode(object):
         # TODO: Subscribe to all the topics you need to
 
 	rospy.Subscriber('/vehicle/dbw_enabled',Bool, self.dbw_enabled_cb)
-	rospy.Subscriber('/twist_cmd', TwistStamped, self.twist_cb)
-	rospy.Subscriber('/current_velocity', TwistStamped, self.velocity_cb)
+	rospy.Subscriber('/twist_cmd', TwistStamped, self.twist_cb,tcp_nodelay=True)
+	rospy.Subscriber('/current_velocity', TwistStamped, self.velocity_cb,tcp_nodelay=True)
 
 	self.current_vel= None
+        self.yaw_rate= None
 	self.curr_ang_vel= None
 	self.dbw_enabled= None
 	self.linear_vel= None
@@ -85,7 +87,7 @@ class DBWNode(object):
 
 
     def loop(self):
-        rate = rospy.Rate(50) # 50Hz
+        rate = rospy.Rate(UPDATE_RATE) # 50Hz, GFH bump down to 30 Hz
         while not rospy.is_shutdown():
             # TODO: Get predicted throttle, brake, and steering using `twist_controller`
             # You should only publish the control commands if dbw is enabled
@@ -118,6 +120,7 @@ class DBWNode(object):
 
     def velocity_cb(self, msg):
         self.current_vel= msg.twist.linear.x
+        self.yaw_rate= msg.twist.angular.z
 
 
     def publish(self, throttle, brake, steer):
