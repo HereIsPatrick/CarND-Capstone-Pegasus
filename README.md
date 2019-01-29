@@ -90,7 +90,7 @@ and dbw_node.py.   The DBW node subscribes to ROS topics
 
 - /current_velocity
 - /twist_cmd
-- /vehicle/dbw_enables
+- /vehicle/dbw_enabled
 
 and publishes to ros topics
 
