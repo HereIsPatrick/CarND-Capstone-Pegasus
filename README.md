@@ -5,7 +5,7 @@ This is the project repo for the final project of the Udacity Self-Driving Car N
 | Pegasus member  | email | 
 |:-----------------|:-------|
 | Patrick Chiu |hereispatrick@gmail.com|
-| Radhesh Bhat || 
+| Radhesh Bhat |radheshbhat@gmail.com| 
 | Gary Holness |gary.holness@gmail.com|
 
 
