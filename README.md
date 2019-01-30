@@ -74,13 +74,16 @@ We choose YOLOv3 to recognize traffic light, because of real-time performance is
 YOLO ROS: Real-Time Object Detection for ROS is [here](https://github.com/leggedrobotics/darknet_ros/)
 After clone darknet ros, change configuration of our darknet ros node, subscribe to /image_color.
 Second change configuration of TLDetector node to subscribe boundingboxes
-``string Class 
-	float64 probability 
-	int64 xmin 
-	int64 ymin 
-	int64 xmax 
-	int64 ymax 
-``
+
+Bounding Box msg structure:
+
+- string Class 
+- float64 probability 
+- int64 xmin 
+- int64 ymin 
+- int64 xmax 
+- int64 ymax 
+
 
 
 ##### Traffic Light Detection Node
@@ -98,12 +101,12 @@ We have two procedure for simulator and site mode.
 
 In simulator mode, we convert image to hsv color space, filter by Red, Yello and Green color.
 
-- Red : 0~20, 340~360 degree.
-- Yello : 40~70 degree.
-- Green : 90~140 degree.
+- Red : 0 ~ 20, 340 ~ 360 degree.
+- Yello : 40 ~ 70 degree.
+- Green : 90 ~ 140 degree.
 
 ![alt text](./imgs/hsl_top.jpg)
-'''
+
 
        # Step. convert to hsv space.
         hsv_bb_img = cv2.cvtColor(bb_image, cv2.COLOR_BGR2HSV)
@@ -119,12 +122,11 @@ In simulator mode, we convert image to hsv color space, filter by Red, Yello and
         # Green color
         hsv_green_range = cv2.inRange(hsv_bb_img, (90.0 / 360 * 255, 100, 100), (140.0 / 360 * 255, 255, 255))
         
-'''
+
 
 We count it after filter, if count pixel greater than 50 pixel in the color.
 we can make sure the light state.
 
-'''
 
         PIXEL_THRESHOLD = 50
         # Red range in hsv space that two region ,(0~20) and (340~360)degree.
@@ -141,7 +143,6 @@ we can make sure the light state.
             print('Unknow')
             return TrafficLight.UNKNOWN
 
-'''
 
 
 
