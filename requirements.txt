@@ -2,7 +2,7 @@ Flask==0.11.1
 attrdict==2.0.0
 eventlet==0.19.0
 python-socketio==1.6.1
-numpy==1.13.1
+numpy==1.13.3
 Pillow==2.2.1
 scipy==0.19.1
 keras==2.0.8
@@ -11,5 +11,4 @@ h5py==2.6.0
 tensorflow-gpu==1.12.0
 empy==3.3.2
 catkin-pkg==0.4.10
-numpy==13.3
 rospkg==1.1.7
