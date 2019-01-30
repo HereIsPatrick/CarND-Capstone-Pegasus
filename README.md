@@ -188,7 +188,7 @@ We can see below right image. maxium counting pixel of region is green light par
 ![alt text](./imgs/tl_classifie_real_full.png)
 
 ## Planning Subsystem
-In waypoint node, we generate waypoints. and will decelerate before stop line.
+The main purpose of waypoint updater is to publish next 200 waypoints which is ahead of the car. Depending on the current position of the car, waypoint updater finds nearest waypoint to the car. This node is also responsible for updating waypoint to decelerate when traffic light is detected. Based on the update from TL detector, we compute the distance from the closest waypoint to the car to two points before the stop waypoint. The two points before the stop line give us a buffer to stop. It then computes the distance to the stop location, and calculates the velocity accordingly.
 
 ## Control Subsystem
 The Control Subsust consists of two major components.  These are the Waypoint Follower and
