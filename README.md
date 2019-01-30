@@ -26,6 +26,11 @@ This is the project repo for the final project of the Udacity Self-Driving Car N
 https://github.com/HereIsPatrick/CarND-Capstone-Pegasus.git
 ```
 
+##### Python( version 2.7.15 )
+```bash
+pyenv local 2.7.15
+``` 
+
 ##### Install python dependence
 ```bash
 cd CarND-Capstone-Pegasus
