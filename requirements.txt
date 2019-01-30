@@ -11,3 +11,5 @@ h5py==2.6.0
 tensorflow-gpu==1.12.0
 empy==3.3.2
 catkin-pkg==0.4.10
+numpy==13.3
+rospkg==1.1.7
