@@ -62,11 +62,7 @@ catkin_make
 source devel/setup.sh
 roslaunch launch/site.launch
 ```
-##### Debug traffic light 
-We can debug via rqt_image_view, subscribe topic /debug_traffic_image, it will show processed traffic light image.
-```bash
-rqt_image_view
-```
+
 
 ## System Architecture Diagram
 The following is a system architecture diagram showing the ROS nodes and topics used in the project. 
@@ -117,8 +113,8 @@ In simulator mode, we convert image to hsv color space, filter by Red, Yello and
 
 ![alt text](./imgs/hsl_top.jpg)
 
-
-       # Step. convert to hsv space.
+```
+        # Step. convert to hsv space.
         hsv_bb_img = cv2.cvtColor(bb_image, cv2.COLOR_BGR2HSV)
 
         # Reference from https://stackoverflow.com/questions/42882498/what-are-the-ranges-to-recognize-different-colors-in-rgb-space
@@ -132,12 +128,12 @@ In simulator mode, we convert image to hsv color space, filter by Red, Yello and
         # Green color
         hsv_green_range = cv2.inRange(hsv_bb_img, (90.0 / 360 * 255, 100, 100), (140.0 / 360 * 255, 255, 255))
         
-
+```
 
 We count it after filter, if count pixel greater than 50 pixel in the color.
 we can make sure the light state.
 
-
+```
         PIXEL_THRESHOLD = 50
         # Red range in hsv space that two region ,(0~20) and (340~360)degree.
         if (cv2.countNonZero(hsv_red1_range) + cv2.countNonZero(hsv_red2_range))/2 > PIXEL_THRESHOLD:
@@ -153,7 +149,7 @@ we can make sure the light state.
             print('Unknow')
             return TrafficLight.UNKNOWN
 
-
+```
 
 
 
@@ -171,7 +167,7 @@ In site mode, we follow steps as below to get light state.
 5. Get the light state base on maxium counting pixel of region. 
 
 We can see below right image. maxium counting pixel of region is green light partition.
-
+```
         s={}
         s[TrafficLight.RED]=red_count
         s[TrafficLight.YELLOW]=yellow_count
@@ -192,7 +188,7 @@ We can see below right image. maxium counting pixel of region is green light par
                 print ('Green Light')
 
         return state
-
+```
 
 ![alt text](./imgs/tl_classifie_real_full.png)
 
