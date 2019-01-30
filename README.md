@@ -9,6 +9,8 @@ This is the project repo for the final project of the Udacity Self-Driving Car N
 | Gary Holness |gary.holness@gmail.com|
 
 
+![alt text](./imgs/capstone.gif)
+
 ### Environment
 | Item  | Detail | 
 |:-----------------|:-------|
