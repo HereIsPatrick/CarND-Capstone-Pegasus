@@ -40,7 +40,7 @@ git clone --recursive https://github.com/leggedrobotics/darknet_ros.git
 ##### Patch darknet_ros (subscription image_color)
 ``` bash
 cd darknet_ros
-patch -p1 ../darknet_ros_yolo.patch
+patch -p1 < ../darknet_ros_yolo.patch
 cd ../../
 ```
 
