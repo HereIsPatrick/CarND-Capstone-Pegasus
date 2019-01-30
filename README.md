@@ -62,7 +62,11 @@ catkin_make
 source devel/setup.sh
 roslaunch launch/site.launch
 ```
-
+##### Debug traffic light 
+We can debug via rqt_image_view, subscribe topic /debug_traffic_image, it will show processed traffic light image.
+```bash
+rqt_image_view
+```
 
 ## System Architecture Diagram
 The following is a system architecture diagram showing the ROS nodes and topics used in the project. 
