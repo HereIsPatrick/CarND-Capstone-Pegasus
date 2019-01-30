@@ -150,6 +150,7 @@ we can make sure the light state.
 
 ![alt text](./imgs/tl_classifie_simulator_full.png)
 
+
 ------
 
 In site mode, we follow steps as below to get light state.
@@ -161,6 +162,28 @@ In site mode, we follow steps as below to get light state.
 5. Get the light state base on maxium counting pixel of region. 
 
 We can see below right image. maxium counting pixel of region is green light partition.
+
+        s={}
+        s[TrafficLight.RED]=red_count
+        s[TrafficLight.YELLOW]=yellow_count
+        s[TrafficLight.GREEN]=green_count
+
+        # Step. get the light state that max pixel of region.
+        state = max(s.iteritems(), key=operator.itemgetter(1))[0]
+
+        if red_count==0 and yellow_count==0 and green_count==0:
+            print("unknow")
+            state = TrafficLight.UNKNOWN
+        else:
+            if state == TrafficLight.RED:
+                print ('Red Light')
+            elif state == TrafficLight.YELLOW:
+                print ('Yellow Light')
+            elif state == TrafficLight.GREEN:
+                print ('Green Light')
+
+        return state
+
 
 ![alt text](./imgs/tl_classifie_real_full.png)
 
