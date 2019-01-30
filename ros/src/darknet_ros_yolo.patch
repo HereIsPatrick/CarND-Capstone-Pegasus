@@ -1,0 +1,60 @@
+diff -Naur -x yolo_network_config -x .git darknet_ros/darknet_ros/CMakeLists.txt m_darknet_ros/darknet_ros/CMakeLists.txt
+--- darknet_ros/darknet_ros/CMakeLists.txt	2019-01-21 17:21:28.546721432 +0800
++++ m_darknet_ros/darknet_ros/CMakeLists.txt	2019-01-20 16:12:39.121256233 +0800
+@@ -236,15 +236,16 @@
+ )
+ 
+ # Download yolov2-tiny.weights
+-set(PATH "${CMAKE_CURRENT_SOURCE_DIR}/yolo_network_config/weights")
+-set(FILE "${PATH}/yolov2-tiny.weights")
+-message(STATUS "Checking and downloading yolov2-tiny.weights if needed ...")
+-if (NOT EXISTS "${FILE}")
+-  message(STATUS "... file does not exist. Downloading now ...")
+-  execute_process(COMMAND wget http://pjreddie.com/media/files/yolov2-tiny.weights -P ${PATH})
+-endif()
++#set(PATH "${CMAKE_CURRENT_SOURCE_DIR}/yolo_network_config/weights")
++#set(FILE "${PATH}/yolov2-tiny.weights")
++#message(STATUS "Checking and downloading yolov2-tiny.weights if needed ...")
++#if (NOT EXISTS "${FILE}")
++#  message(STATUS "... file does not exist. Downloading now ...")
++#  execute_process(COMMAND wget http://pjreddie.com/media/files/yolov2-tiny.weights -P ${PATH})
++#endif()
+ 
+ # Download yolov3.weights
++set(PATH "${CMAKE_CURRENT_SOURCE_DIR}/yolo_network_config/weights")
+ set(FILE "${PATH}/yolov3.weights")
+ message(STATUS "Checking and downloading yolov3.weights if needed ...")
+ if (NOT EXISTS "${FILE}")
+@@ -258,13 +259,13 @@
+ 
+ if(CATKIN_ENABLE_TESTING)
+   # Download yolov2.weights
+-  set(PATH "${CMAKE_CURRENT_SOURCE_DIR}/yolo_network_config/weights")
+-  set(FILE "${PATH}/yolov2.weights")
+-  message(STATUS "Checking and downloading yolov2.weights if needed ...")
+-  if (NOT EXISTS "${FILE}")
+-    message(STATUS "... file does not exist. Downloading now ...")
+-    execute_process(COMMAND wget http://pjreddie.com/media/files/yolov2.weights -P ${PATH})
+-  endif()
++  #set(PATH "${CMAKE_CURRENT_SOURCE_DIR}/yolo_network_config/weights")
++  #set(FILE "${PATH}/yolov2.weights")
++  #message(STATUS "Checking and downloading yolov2.weights if needed ...")
++  #if (NOT EXISTS "${FILE}")
++  #  message(STATUS "... file does not exist. Downloading now ...")
++  #  execute_process(COMMAND wget http://pjreddie.com/media/files/yolov2.weights -P ${PATH})
++  #endif()
+ 
+   find_package(rostest REQUIRED)
+ 
+diff -Naur -x yolo_network_config -x .git darknet_ros/darknet_ros/config/ros.yaml m_darknet_ros/darknet_ros/config/ros.yaml
+--- darknet_ros/darknet_ros/config/ros.yaml	2019-01-21 17:21:28.546721432 +0800
++++ m_darknet_ros/darknet_ros/config/ros.yaml	2019-01-27 17:12:51.468756208 +0800
+@@ -1,7 +1,7 @@
+ subscribers:
+ 
+   camera_reading:
+-    topic: /camera/rgb/image_raw
++    topic: /image_color
+     queue_size: 1
+ 
+ actions:
