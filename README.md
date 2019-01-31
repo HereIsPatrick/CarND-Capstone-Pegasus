@@ -70,7 +70,7 @@ If we want to check image status that we processed, we can launch rqt_image_view
 ```bash
 rqt_image_view
 ```
-![alt text](./imgs/rqt_image_view.png)
+![alt text](./imgs/rqt_image_view.png =215x471)
 
 ## System Architecture Diagram
 The following is a system architecture diagram showing the ROS nodes and topics used in the project. 
