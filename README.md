@@ -72,10 +72,12 @@ rqt_image_view
 ```
 ![alt text](./imgs/rqt_image_view.png =215x471)
 
+<img src="./imgs/rqt_image_view.png" width="215" height="471" />
+
 ## System Architecture Diagram
 The following is a system architecture diagram showing the ROS nodes and topics used in the project. 
 
-![alt text](./imgs/final-project-ros-graph-v2.png){:height="50%" width="50%"}
+![alt text](./imgs/final-project-ros-graph-v2.png)
 
 ## Perception Subsystem
 This capstone project that use car's camera to percept traffic light, feedback light state(Red,Yellow and Green) and nearest waypoint to system.
