@@ -51,20 +51,26 @@ patch -p1 < ../darknet_ros_yolo.patch
 cd ../../
 ```
 
-##### Make and run simulator
+##### Make and run (simulator mode)
 ```bash
 catkin_make
 source devel/setup.sh
 roslaunch launch/styx.launch
 ```
 
-##### Make and run site
+##### Make and run (site mode)
 ```bash
 catkin_make
 source devel/setup.sh
 roslaunch launch/site.launch
 ```
 
+##### Debug with image view
+If we want to check image status that we processed, we can launch rqt_image_view to subscribe topic /debug_traffic_light 
+```bash
+rqt_image_view
+```
+![alt text](./imgs/rqt_image_view.png)
 
 ## System Architecture Diagram
 The following is a system architecture diagram showing the ROS nodes and topics used in the project. 
@@ -94,7 +100,7 @@ Bounding Box msg structure:
 
 
 ##### Traffic Light Detection Node
-Subscribe image_color and boundingboxes topic for Traffic Light Detection Node. 
+Subscribe image_color and /darnet_ros/bounding_boxes topic for Traffic Light Detection Node. 
 
 We only process traffic light class, and probaility greater than 0.85 in simulator mode. 0.25 in site mode.
 
@@ -195,7 +201,8 @@ We can see below right image. maxium counting pixel of region is green light par
 ![alt text](./imgs/tl_classifie_real_full.png)
 
 ## Planning Subsystem
-In waypoint node, we generate waypoints. and will decelerate before stop line.
+The main purpose of waypoint updater is to publish next 200 waypoints which is ahead of the car. Depending on the current position of the car, waypoint updater finds nearest waypoint to the car. This node is also responsible for updating waypoint to decelerate when traffic light is detected. Based on the update from TL detector, we compute the distance from the closest waypoint to the car to two points before the stop waypoint. The two points before the stop line give us a buffer to stop. It then computes the distance to the stop location, and calculates the velocity accordingly.
+
 
 ## Control Subsystem
 The Control Subsust consists of two major components.  These are the Waypoint Follower and
@@ -231,6 +238,35 @@ The cutoff frequency was tested at a number of settings.  This began fairly agre
 
 When running ROS on the Ubuntu 16.04 Virtual Machine and the simulator natively, there was a serious issue with lag.  The issue concerns the simulator publishing topics to the ROS nodes on the VM faster than can be handled.  After many hours of investigation, information online points to the ROS messaging protocol. This issue arose when the camera was turned on in the simulation (highway).  A real fix would involve the ability to slow down the simulator's publish rate of Image messages to /image_color topic.  In lieu of that, addressing it included slowing down dbw_node.py rate to 10Hz and turning on tcp_nodelay=True in subscriptions for TwistStamped messages for /twist_cmd and /current_velocity topics.  When testing on a slower machine, these helped mitigate the lag issue.  The lag issue caused the car to oscillate and become uncontrollable because the control commands were out of synch with the state of the simulator due to ROS on the VM being overwhelmed messages published by the simulator.
 
+#### Comparision parameter
+Here is 2 set parameters for dbw.
+- Parameter 1:
+  - kp=8.5
+  - ki=0.05
+  - kd=6.0
+  - mx=0.8
+  - brake=700
+
+- Parameter 2:
+  - kp=0.3
+  - ki=0.1
+  - kd=0.0
+  - mx=0.2
+  - brake=400
+
+
+We compare two set parameters as above.
+
+Parameter 1 is too aggressive, maximum throttle is 0.8.
+In real churchlot, Too fast speed could scare carla’s driver and stop our test.
+On highway simulator, Parameter 1 makes throttle and brake change happen frequently.
+And brake always in use.It’s not good for car.
+
+Parameter 2 is stable than Parameter 1.
+Eventually we choose Parameter 2. 
+You can watch video as below link.(Left side is Parameter 1, Right side is Parameter 2)
+[![Comparsion Parameter](http://img.youtube.com/vi/A27kHtjJ0Y0/0.jpg)](https://youtu.be/A27kHtjJ0Y0
+ "Comparsion Parameter")
 
 ## Result of Video
 #### Simulator(Highway Time-lapse with music)
