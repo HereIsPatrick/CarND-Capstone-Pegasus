@@ -263,7 +263,9 @@ On highway simulator, Parameter 1 makes throttle and brake change happen frequen
 And brake always in use.It’s not good for car.
 
 Parameter 2 is stable than Parameter 1.
+
 Eventually we choose Parameter 2. 
+
 You can watch video as below link.(Left side is Parameter 1, Right side is Parameter 2)
 
 [![Comparsion Parameter](http://img.youtube.com/vi/A27kHtjJ0Y0/0.jpg)](https://youtu.be/A27kHtjJ0Y0
