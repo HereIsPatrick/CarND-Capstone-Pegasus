@@ -75,7 +75,7 @@ rqt_image_view
 ## System Architecture Diagram
 The following is a system architecture diagram showing the ROS nodes and topics used in the project. 
 
-![alt text](./imgs/final-project-ros-graph-v2.png)
+![alt text](./imgs/final-project-ros-graph-v2.png){:height="50%" width="50%"}
 
 ## Perception Subsystem
 This capstone project that use car's camera to percept traffic light, feedback light state(Red,Yellow and Green) and nearest waypoint to system.
@@ -265,6 +265,7 @@ And brake always in use.It’s not good for car.
 Parameter 2 is stable than Parameter 1.
 Eventually we choose Parameter 2. 
 You can watch video as below link.(Left side is Parameter 1, Right side is Parameter 2)
+
 [![Comparsion Parameter](http://img.youtube.com/vi/A27kHtjJ0Y0/0.jpg)](https://youtu.be/A27kHtjJ0Y0
  "Comparsion Parameter")
 
